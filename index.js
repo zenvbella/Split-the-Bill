@@ -1,12 +1,20 @@
 // Global variables
 var sum = 0;
+var listingArray = [];
 var itemArray = [];
+var priceArray = [];
 var itemList = document.getElementById("itemList");
+var total = document.getElementById("total");
 
-// Remove last item entered in array when button is clicked and update item list
+// Remove last item entered in array when button is clicked and update item list and total
 document.getElementById("removeLastItem").addEventListener("click", function (event) {
+    var item = itemArray.slice(-1);
+    var price = priceArray.slice(-1);
+    listingArray.splice(-1);
     itemArray.splice(-1);
+    priceArray.splice(-1);
     updateList();
+    subtractFromSum(price);
 });
 
 // ITEMS FORM SUBMISSION: Update items & price listings with user input
@@ -16,36 +24,45 @@ document.getElementById("itemForm").addEventListener("submit", function (event) 
     // Local variables
     var textInput = document.getElementById("textInput");
     var priceInput = document.getElementById("priceInput");
-    var total = document.getElementById("total");
-    var word = document.getElementById("textInput").value;
+    var item = document.getElementById("textInput").value;
     var price = document.getElementById("priceInput").value;
-    var listing = `${word} $${price}`;
 
     // Add item to array, calculate new total, and update listing
-    addToArray(listing);
+    addToArray(item, price);
     updateList();
-    calculateSum(price);
-    total.textContent = `$${sum}`;
+    addToSum(price);
 
     // Clear text input field 
     textInput.value = "";
     priceInput.value = "";
 });
 
-// FUNCTION: Calculate sum 
-function calculateSum(price) {
+// FUNCTION: Calculate sum and update total
+function addToSum(price) {
     sum = Number(sum) + Number(price);
+    total.textContent = `$${sum}`;
 }
 
-// FUNCTION: Add item to array
-function addToArray(item) {
+// FUNCTION: Calculate sum and update total
+function subtractFromSum(price) {
+    sum = Number(sum) - Number(price);
+    total.textContent = `$${sum}`;
+}
+
+// FUNCTION: Add input to arrays
+function addToArray(item, price) {
+    var listing = `${item} $${price}`;
+    listingArray.push(listing);
     itemArray.push(item);
+    priceArray.push(price);
+    console.log(itemArray);
+    console.log(priceArray);
 }
 
 // FUNCTION: Loop through array and update list with contents
 function updateList() {
     itemList.textContent = "";
-    for (var i of itemArray) {
+    for (var i of listingArray) {
         var li = document.createElement("li");
         li.appendChild(document.createTextNode(i));
         itemList.appendChild(li);
