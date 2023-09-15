@@ -1,0 +1,21 @@
+.steps {
+    background-color: rgb(208, 235, 174);
+    padding: 3rem;
+    margin: 3rem 15rem;
+}
+
+.steps>h3 {
+    color: rgb(76, 86, 76);
+}
+
+.form-div {
+    background-color: rgb(185, 201, 165);
+    padding: 3rem;
+    margin: 1rem;
+}
+
+.list-div {
+    background-color: rgb(238, 243, 231);
+    padding: 3rem;
+    margin: 1rem;
+}
