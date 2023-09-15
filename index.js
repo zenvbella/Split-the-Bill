@@ -1,21 +1,9 @@
 // Global variables
 var sum = 0;
-var listingArray = [];
 var itemArray = [];
 var priceArray = [];
 var itemList = document.getElementById("itemList");
 var total = document.getElementById("total");
-
-// Remove last item entered in array when button is clicked and update item list and total
-document.getElementById("removeLastItem").addEventListener("click", function (event) {
-    var item = itemArray.slice(-1);
-    var price = priceArray.slice(-1);
-    listingArray.splice(-1);
-    itemArray.splice(-1);
-    priceArray.splice(-1);
-    updateList();
-    subtractFromSum(price);
-});
 
 // ITEMS FORM SUBMISSION: Update items & price listings with user input
 document.getElementById("itemForm").addEventListener("submit", function (event) {
@@ -37,13 +25,23 @@ document.getElementById("itemForm").addEventListener("submit", function (event) 
     priceInput.value = "";
 });
 
-// FUNCTION: Calculate sum and update total
+// Remove last item entered in array when button is clicked and update item list and total
+document.getElementById("removeLastItem").addEventListener("click", function (event) {
+    var item = itemArray.slice(-1);
+    var price = priceArray.slice(-1);
+    itemArray.splice(-1);
+    priceArray.splice(-1);
+    updateList();
+    subtractFromSum(price);
+});
+
+// FUNCTION: Add price of new item to total
 function addToSum(price) {
     sum = Number(sum) + Number(price);
     total.textContent = `$${sum}`;
 }
 
-// FUNCTION: Calculate sum and update total
+// FUNCTION: Subtract price of removed item
 function subtractFromSum(price) {
     sum = (Number(sum) - Number(price)).toFixed(2);
     total.textContent = `$${sum}`;
@@ -52,19 +50,17 @@ function subtractFromSum(price) {
 // FUNCTION: Add input to arrays
 function addToArray(item, price) {
     var listing = `${item} $${price}`;
-    listingArray.push(listing);
     itemArray.push(item);
     priceArray.push(price);
-    console.log(itemArray);
-    console.log(priceArray);
 }
 
 // FUNCTION: Loop through array and update list with contents, adding a delete button for each listing
 function updateList() {
     itemList.textContent = "";
-    for (var i of listingArray) {
+    for (let i = 0; i < itemArray.length; i++) {
         var li = document.createElement("li");
-        li.appendChild(document.createTextNode(i));
+        var listing = `${itemArray[i]} $${priceArray[i]}`;
+        li.appendChild(document.createTextNode(listing));
 
         var button = document.createElement("button");
         button.textContent = "Delete";
