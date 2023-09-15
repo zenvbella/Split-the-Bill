@@ -45,7 +45,7 @@ function addToSum(price) {
 
 // FUNCTION: Calculate sum and update total
 function subtractFromSum(price) {
-    sum = Number(sum) - Number(price);
+    sum = (Number(sum) - Number(price)).toFixed(2);
     total.textContent = `$${sum}`;
 }
 
@@ -59,13 +59,22 @@ function addToArray(item, price) {
     console.log(priceArray);
 }
 
-// FUNCTION: Loop through array and update list with contents
+// FUNCTION: Loop through array and update list with contents, adding a delete button for each listing
 function updateList() {
     itemList.textContent = "";
     for (var i of listingArray) {
         var li = document.createElement("li");
         li.appendChild(document.createTextNode(i));
-        itemList.appendChild(li);
+
+        var button = document.createElement("button");
+        button.textContent = "Delete";
+        button.addEventListener("click", function () {
+            // Remove the parent list item when the button is clicked
+            this.parentNode.remove();
+        });
+        li.appendChild(button);
+
+        itemList.appendChild(li); //add bullet to list
     }
 }
 
