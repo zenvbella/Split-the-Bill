@@ -1,3 +1,7 @@
+// Temp variables (DELETE AFTER TESTING)
+var tempItemArray = [];
+var tempPriceArray = [];
+
 // Global variables
 var sum = 0;
 var itemArray = [];
