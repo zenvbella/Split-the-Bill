@@ -5,17 +5,6 @@ var priceArray = [];
 var itemList = document.getElementById("itemList");
 var total = document.getElementById("total");
 
-
-// START TESTING CODE
-// ****************
-
-
-
-// ****************
-// END TESTING CODE
-
-
-
 // ITEMS FORM SUBMISSION: Update items & price listings with user input
 document.getElementById("itemForm").addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the form from submitting normally
@@ -75,7 +64,7 @@ function updateList() {
     }
 }
 
-function removeItem(btnID){
+function removeItem(btnID) {
     var buttonID = Number(btnID);
     var price = priceArray[buttonID];
     subtractFromSum(price);
@@ -102,4 +91,3 @@ document.getElementById("nameForm").addEventListener("submit", function (event) 
     // Clear text input field
     textInput.value = "";
 });
-
