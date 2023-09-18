@@ -1,7 +1,7 @@
 .steps {
     background-color: #c2e5f2;
     padding: 3rem;
-    margin: 3rem 15rem;
+    margin: 3rem;
 }
 
 .steps>h3 {
@@ -24,4 +24,13 @@
 #removeLastItem {
     background-color: rgb(251, 188, 117);
     border: solid 1px black;
+}
+
+#outerContainer {
+    display: flex;
+    justify-content: center;
+}
+
+#priceInput {
+    background-color: pink;
 }

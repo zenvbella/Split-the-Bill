@@ -5,6 +5,17 @@ var priceArray = [];
 var itemList = document.getElementById("itemList");
 var total = document.getElementById("total");
 
+
+// START TESTING CODE
+// ****************
+
+
+
+// ****************
+// END TESTING CODE
+
+
+
 // ITEMS FORM SUBMISSION: Update items & price listings with user input
 document.getElementById("itemForm").addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the form from submitting normally
@@ -25,26 +36,16 @@ document.getElementById("itemForm").addEventListener("submit", function (event) 
     priceInput.value = "";
 });
 
-// Remove last item entered in array when button is clicked and update item list and total
-document.getElementById("removeLastItem").addEventListener("click", function (event) {
-    var item = itemArray.slice(-1);
-    var price = priceArray.slice(-1);
-    itemArray.splice(-1);
-    priceArray.splice(-1);
-    updateList();
-    subtractFromSum(price);
-});
-
 // FUNCTION: Add price of new item to total
 function addToSum(price) {
     sum = Number(sum) + Number(price);
-    total.textContent = `$${sum}`;
+    total.textContent = `$${sum.toFixed(2)}`;
 }
 
 // FUNCTION: Subtract price of removed item
 function subtractFromSum(price) {
-    sum = (Number(sum) - Number(price)).toFixed(2);
-    total.textContent = `$${sum}`;
+    sum = (Number(sum) - Number(price))
+    total.textContent = `$${sum.toFixed(2)}`;
 }
 
 // FUNCTION: Add input to arrays
@@ -59,19 +60,28 @@ function updateList() {
     itemList.textContent = "";
     for (let i = 0; i < itemArray.length; i++) {
         var li = document.createElement("li");
-        var listing = `${itemArray[i]} $${priceArray[i]}`;
+        var listing = `${itemArray[i]} $${priceArray[i]}  `;
         li.appendChild(document.createTextNode(listing));
-
         var button = document.createElement("button");
         button.textContent = "Delete";
+        button.id = `${i}`;
         button.addEventListener("click", function () {
             // Remove the parent list item when the button is clicked
+            removeItem(button.id);
             this.parentNode.remove();
         });
         li.appendChild(button);
-
         itemList.appendChild(li); //add bullet to list
     }
+}
+
+function removeItem(btnID){
+    var buttonID = Number(btnID);
+    var price = priceArray[buttonID];
+    subtractFromSum(price);
+    itemArray.splice(buttonID, 1);
+    priceArray.splice(buttonID, 1)
+    updateList();
 }
 
 // NAMES FORM SUBMISSION: Update names list with new input
