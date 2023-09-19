@@ -16,7 +16,7 @@
 }
 
 .list-div {
-    background-color: #63c9ef;
+    background-color: rgb(249, 215, 152);
     padding: 3rem;
     margin: 1rem;
 }
@@ -29,4 +29,5 @@
 #outerContainer {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
