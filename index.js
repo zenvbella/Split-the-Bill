@@ -28,8 +28,7 @@ document.getElementById("itemForm").addEventListener("submit", function (event) 
     btn.textContent = "Delete";
     btn.addEventListener("click", function () {
         // Remove the parent list item when the button is clicked
-        removeItem(button.id);
-        this.parentNode.remove();
+        removeItem(btn.id);
     });
 
 
@@ -111,15 +110,15 @@ function updateList() {
     }
 }
 
-// function removeItem(btnID) {
-//     var buttonID = Number(btnID);
-//     console.log(`removeItem called with ID: ${buttonID}`);
-//     var price = priceArray[buttonID];
-//     subtractFromSum(price);
-//     itemArray.splice(buttonID, 1);
-//     priceArray.splice(buttonID, 1)
-//     updateList();
-// }
+function removeItem(btnID) {
+    var buttonID = Number(btnID);
+    console.log(`removeItem called with ID: ${buttonID}`);
+    var price = priceArray[buttonID];
+    subtractFromSum(price);
+    itemArray.splice(buttonID, 1);
+    priceArray.splice(buttonID, 1)
+    updateList();
+}
 
 // NAMES FORM SUBMISSION: Update names list with new input
 document.getElementById("nameForm").addEventListener("submit", function (event) {
