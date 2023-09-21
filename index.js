@@ -52,8 +52,6 @@ document.getElementById("taxTipForm").addEventListener("submit", function (event
     tax = Number(document.getElementById("taxInput").value);
     tip = Number(document.getElementById("tipInput").value);
 
-    console.log("Tax and Tip Form Submitted");
-
     taxDisplay.textContent = `$${tax.toFixed(2)}`;
     tipDisplay.textContent = `$${tip.toFixed(2)}`;
 
@@ -70,10 +68,6 @@ function addToArray(item, price, btn) {
     itemArray.push(item);
     priceArray.push(price);
     btnArray.push(btn);
-    console.log(`Button ID: ${btn.id}`)
-    console.log(`Button array: ${btnArray}`);
-    console.log(`Item Array: ${itemArray}`);
-    console.log(`Price Array: ${priceArray}`);
 }
 
 // FUNCTION: Add price of new item to subtotal
@@ -102,7 +96,7 @@ function updateList() {
     itemList.textContent = "";
     for (let i = 0; i < itemArray.length; i++) {
         var li = document.createElement("li");
-        var listing = `${itemArray[i]} $${priceArray[i]}`;
+        var listing = `${itemArray[i]} $${priceArray[i]} `;
         li.appendChild(document.createTextNode(listing));
         var tempButton = btnArray[i];
         li.appendChild(tempButton);
@@ -112,7 +106,6 @@ function updateList() {
 
 function removeItem(btnID) {
     var buttonID = Number(btnID);
-    console.log(`removeItem called with ID: ${buttonID}`);
     var price = priceArray[buttonID];
     subtractFromSum(price);
     itemArray.splice(buttonID, 1);
