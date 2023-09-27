@@ -7,7 +7,6 @@ var itemArray = [];
 var priceArray = [];
 var btnArray = [];
 var itemList = document.getElementById("itemList");
-var btnList = document.getElementById("btnList");
 var subtotalDisplay = document.getElementById("subtotal");
 var taxDisplay = document.getElementById("tax");
 var tipDisplay = document.getElementById("tip");
@@ -56,11 +55,21 @@ document.getElementById("taxTipForm").addEventListener("submit", function (event
     tipDisplay.textContent = `$${tip.toFixed(2)}`;
 
     getTotal();
+    var taxPercentage = getPercentage(tax);
+    var tipPercentage = getPercentage(tip);
+    console.log(`Tax: ${taxPercentage}%`);
+    console.log(`Tip: ${tipPercentage}%`);
 
     // Clear text input field 
     taxInput.value = "";
     tipInput.value = "";
 });
+
+//FUNCTION: Calculate percentage of input from subtotal
+function getPercentage(input) {
+    var percentage = input / subtotal;
+    return percentage.toFixed(2);
+}
 
 // FUNCTION: Add input to arrays
 function addToArray(item, price, btn) {
